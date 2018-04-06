@@ -26,7 +26,9 @@ class LoginForm extends React.Component {
 
         axios.get(url)
             .then((res => {
-                const data = res.data.filter(filter).filter(filter_password)
+                const data = res.data.filter(filter).filter(filter_password).map(obj =>{
+                    return obj
+                })
 
                 console.log(data)
                 if (data.length > 0)
