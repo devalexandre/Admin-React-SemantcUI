@@ -1,6 +1,9 @@
 import React from 'react'
 import {Button, Form, Grid, Header, Image, Message, Segment} from 'semantic-ui-react'
 import axios from 'axios'
+import { auth } from '../actions/login'
+import {  bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 class LoginForm extends React.Component {
 
@@ -32,6 +35,7 @@ class LoginForm extends React.Component {
 
                 console.log(data)
                 if (data.length > 0)
+                    this.props.auth(data)
                     history.push('/dashboard');
 
             }))
@@ -103,4 +107,7 @@ body{
     }
 }
 
-export default LoginForm
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({auth},dispatch);
+}
+export default connect(null,mapDispatchToProps)(LoginForm)
